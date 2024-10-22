@@ -1,0 +1,69 @@
+{
+  "configVersion": "v2",
+  "app": {
+    "appId": 1065026,
+    "appName": "Future Plans",
+    "appType": "watchface",
+    "version": {
+      "code": 1,
+      "name": "1.0"
+    },
+    "vender": "Stashchenko",
+    "venderId": 7080715909,
+    "description": "Shows calendar for next 2 weeks",
+    "icon": "icon.png"
+  },
+  "permissions": [],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "1.0.0",
+      "target": "1.0.1",
+      "minVersion": "1.0.0"
+    }
+  },
+  "targets": {
+    "square": {
+      "module": {
+        "watchface": {
+          "path": "watchface/index",
+          "main": 1,
+          "editable": 0,
+          "lockscreen": 1
+        }
+      },
+      "platforms": [
+        {
+          "name": "Active",
+          "deviceSource": 7995648
+        },
+        {
+          "name": "Active",
+          "deviceSource": 7995649
+        },
+        {
+          "name": "GTS-4",
+          "deviceSource": 8323328
+        },
+        {
+          "name": "GTS-4",
+          "deviceSource": 8323329
+        },
+        {
+          "name": "Cheetah Square",
+          "deviceSource": 8257793
+        }
+      ],
+      "designWidth": 390
+    }
+  },
+  "i18n": {
+    "en-US": {
+      "appName": "Future Plans"
+    },
+    "uk-UA": {
+      "appName": "Future Plans"
+    }
+  },
+  "defaultLanguage": "uk-UA",
+  "debug": false
+}
