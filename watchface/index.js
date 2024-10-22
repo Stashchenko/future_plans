@@ -1,4 +1,3 @@
-const weekDays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Нд"];
 const colorWhite = 0xffffff;
 // const colorRed = 0xffffff;
 
@@ -16,6 +15,9 @@ const small_numbers = [
 ];
 const logger = Logger.getLogger('watchface');
 
+import {getLangTable} from './i18n'
+
+const weekDays = getLangTable().weekNamesConfig
 
 try {
     ((() => {
@@ -24,7 +26,6 @@ try {
 
         __$$module$$__.module = DeviceRuntimeCore.WatchFace({
             init_view() {
-
                 // background
                 hmUI.createWidget(hmUI.widget.IMG, {
                     x: 0,
