@@ -1,5 +1,7 @@
 ### Watchface for amazfit 
 
+![preview.png](preview.png)
+
 To run simulator:
 `cd /Applications/simulator.app/Contents/MacOS && sudo -s ./simulator`
 
