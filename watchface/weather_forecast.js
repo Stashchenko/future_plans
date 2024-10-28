@@ -29,7 +29,7 @@ export function WeatherForecastWidget() {
     // weather city
     weatherWidgets.push(hmUI.createWidget(hmUI.widget.TEXT, {
         x: 5,
-        y: 80,
+        y: 60,
         w: 95,
         h: 46,
         color: colorWhite,

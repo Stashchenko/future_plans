@@ -36,7 +36,7 @@ try {
                 hmUI.createWidget(hmUI.widget.IMG_TIME, {
                     hour_zero: 1,
                     hour_startX: 107,
-                    hour_startY: 104,
+                    hour_startY: 75,
                     hour_array: [
                         'hours/0.png',
                         'hours/1.png',
@@ -53,7 +53,7 @@ try {
                     hour_align: hmUI.align.RIGHT,
                     minute_zero: 1,
                     minute_startX: 255,
-                    minute_startY: 104,
+                    minute_startY: 75,
                     minute_array: [
                         'hours/0.png',
                         'hours/1.png',
@@ -75,7 +75,7 @@ try {
 
                 hmUI.createWidget(hmUI.widget.IMG_LEVEL, {
                     x: 23,
-                    y: 116,
+                    y: 95,
                     image_array: [
                         'weather/0.png',
                         'weather/1.png',
@@ -113,7 +113,7 @@ try {
                 });
                 hmUI.createWidget(hmUI.widget.TEXT_IMG, {
                     x: 12,
-                    y: 161,
+                    y: 135,
                     type: hmUI.data_type.WEATHER_CURRENT,
                     font_array: small_numbers,
                     align_h: hmUI.align.CENTER_H,

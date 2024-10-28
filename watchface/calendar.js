@@ -32,7 +32,7 @@ export function CalendarWidget() {
         // }
         hmUI.createWidget(hmUI.widget.TEXT, {
             x: shift,
-            y: 208,
+            y: 178,
             w: 50,
             h: 25,
             color: colorWhite,
@@ -49,7 +49,7 @@ export function CalendarWidget() {
     // date on top dd.mm.yyyy
     calendarWidget.push(hmUI.createWidget(hmUI.widget.TEXT, {
         x: 80,
-        y: 45,
+        y: 10,
         w: 230,
         h: 35,
         color: colorWhite,
@@ -62,7 +62,7 @@ export function CalendarWidget() {
 
     let dates = getNextTwoWeeksDates(currentDay, currentMonth, currentYear)
     let shiftX = 10; // Initialize the shift for x position
-    let shitY = 210; // Initialize y position
+    let shitY = 180; // Initialize y position
     let weekColor = colorWhite
     dates.forEach((day, index) => {
         if (index % 7 === 0) {
@@ -120,7 +120,7 @@ function getNextTwoWeeksDates(currentDay, currentMonth, currentYear) {
     currentDate.setDate(currentDate.getDate() + mondayOffset);
 
     // Loop to get the next 14 days starting from the most recent Monday
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < 21; i++) {
         // Push the actual date (day of the month) into the array
         dates.push(currentDate.getDate()); // Push just the day of the month
 
