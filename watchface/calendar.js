@@ -7,7 +7,7 @@ let calendarWidget = []
 let lastUpdatedCalendar = new Date(1997, 1, 10);
 
 export function CalendarWidget() {
-    if (lastUpdatedCalendar.getDay() === new Date().getDay()) {
+    if (lastUpdatedCalendar === new Date()) {
         return;
     }
 
@@ -16,6 +16,11 @@ export function CalendarWidget() {
         calendarWidget = []
     })
 
+    const time = hmSensor.createSensor(hmSensor.id.TIME)
+    // Get the current month and year (assuming `time` has the current day, month, year)
+    let currentMonth = time.month; // 1 for January, 2 for February, etc
+    let currentYear = time.year; // Current year
+    let currentDay = time.day; // Current day
 
     lastUpdatedCalendar = new Date();
 
@@ -40,11 +45,6 @@ export function CalendarWidget() {
         shift = shift + 54;
     });
 
-    const time = hmSensor.createSensor(hmSensor.id.TIME)
-    // Get the current month and year (assuming `time` has the current day, month, year)
-    let currentMonth = time.month; // 1 for January, 2 for February, etc
-    let currentYear = time.year; // Current year
-    let currentDay = time.day; // Current day
 
     // date on top dd.mm.yyyy
     calendarWidget.push(hmUI.createWidget(hmUI.widget.TEXT, {
@@ -57,7 +57,7 @@ export function CalendarWidget() {
         align_h: hmUI.align.CENTER_H,
         align_v: hmUI.align.CENTER_V,
         text_style: hmUI.text_style.NONE,
-        text: time.day + "." + time.month + "." + time.year
+        text: currentDay + "." + currentMonth + "." + currentYear
     }));
 
     let dates = getNextTwoWeeksDates(currentDay, currentMonth, currentYear)

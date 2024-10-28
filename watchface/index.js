@@ -196,14 +196,14 @@ try {
                 })
             },
             onInit() {
-                logger.log('index page.js on init invoke');
+                logger.log('calendar init invoke');
             },
             build() {
                 this.init_view();
-                logger.log('index page.js on ready invoke');
+                logger.log('calendar on ready invoke');
             },
             onDestroy() {
-                logger.log('index page.js on destroy invoke');
+                logger.log('calendar on destroy invoke');
             }
         });
     })());

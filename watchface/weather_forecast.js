@@ -5,13 +5,13 @@ const refreshIn = 60 * 60 * 1000; // 1 hour in milliseconds
 const weekDays = getLangTable().weekNamesConfig
 
 let weatherWidgets = []
-let lastUpdatedWeather = new Date(1997, 1, 10);
+let lastUpdatedWeatherTime = new Date(1997, 1, 10);
 
 export function WeatherForecastWidget() {
     const currentTime = new Date();
 
     // Check if refreshIn has passed since the last weather update
-    if (currentTime - lastUpdatedWeather < refreshIn) {
+    if (currentTime - lastUpdatedWeatherTime < refreshIn) {
         return;
     }
 
@@ -21,7 +21,7 @@ export function WeatherForecastWidget() {
         weatherWidgets = []
     })
 
-    lastUpdatedWeather = currentTime
+    lastUpdatedWeatherTime = currentTime
     const weather = hmSensor.createSensor(hmSensor.id.WEATHER)
     const weatherData = weather.getForecastWeather()
     const forecastData = weatherData.forecastData
@@ -41,15 +41,18 @@ export function WeatherForecastWidget() {
     }));
 
     // forecast
-    let shift = 25
-    let tomorrow = new Date().getDay()
+    let startPositionX = 30;
+    let offsetX = 20;
+    let widthElement = 40;
+
+    let todayDay = new Date().getDay(); // day of the week
     for (let i = 1; i <= 4; i++) {
         const element = forecastData.data[i]
-        const weekDayIndex = (tomorrow + i + 6) % 7;
+        const weekDayIndex = (todayDay + i + 6) % 7;
         weatherWidgets.push(hmUI.createWidget(hmUI.widget.TEXT, {
-            x: shift - 20,
+            x: startPositionX - offsetX,
             y: 308,
-            w: 48,
+            w: widthElement,
             h: 30,
             color: colorWhite,
             text_size: 25,
@@ -59,18 +62,18 @@ export function WeatherForecastWidget() {
             text: weekDays[weekDayIndex]
         }));
         weatherWidgets.push(hmUI.createWidget(hmUI.widget.IMG, {
-            x: shift + 20,
+            x: startPositionX + offsetX,
             y: 308,
-            w: 50,
+            w: widthElement,
             h: 50,
             src: 'weather/' + element.index + '.png',
             show_level: hmUI.show_level.ONLY_NORMAL
         }));
         weatherWidgets.push(hmUI.createWidget(hmUI.widget.TEXT, {
-            x: shift - 22,
-            y: 343,
-            w: 80,
-            h: 30,
+            x: startPositionX - 25,
+            y: 340,
+            w: widthElement * 2,
+            h: 40,
             color: colorWhite,
             text_size: 25,
             align_h: hmUI.align.CENTER_H,
@@ -78,6 +81,6 @@ export function WeatherForecastWidget() {
             text_style: hmUI.text_style.NONE,
             text: element.low + "/" + element.high
         }));
-        shift = shift + 95
+        startPositionX += 95
     }
 }
