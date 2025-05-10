@@ -7,22 +7,27 @@ let calendarWidget = []
 let lastUpdatedCalendar = new Date(1997, 1, 10);
 
 export function CalendarWidget() {
-    if (lastUpdatedCalendar === new Date()) {
+    const today = new Date();
+    if (
+        lastUpdatedCalendar.getFullYear() === today.getFullYear() &&
+        lastUpdatedCalendar.getMonth() === today.getMonth() &&
+        lastUpdatedCalendar.getDate() === today.getDate()
+    ) {
         return;
     }
 
+    lastUpdatedCalendar = new Date();
+
     calendarWidget.forEach((widget, index) => {
         hmUI.deleteWidget(widget)
-        calendarWidget = []
     })
+    calendarWidget = []
 
     const time = hmSensor.createSensor(hmSensor.id.TIME)
     // Get the current month and year (assuming `time` has the current day, month, year)
     let currentMonth = time.month; // 1 for January, 2 for February, etc
     let currentYear = time.year; // Current year
     let currentDay = time.day; // Current day
-
-    lastUpdatedCalendar = new Date();
 
     // calendar week names
     let shift = 10;
@@ -62,11 +67,11 @@ export function CalendarWidget() {
 
     let dates = getNextTwoWeeksDates(currentDay, currentMonth, currentYear)
     let shiftX = 10; // Initialize the shift for x position
-    let shitY = 210; // Initialize y position
+    let shiftY = 210; // Initialize y position
     let weekColor = colorWhite
     dates.forEach((day, index) => {
         if (index % 7 === 0) {
-            shitY += 32; // Move down by 30 pixels for every 7th item
+            shiftY += 32; // Move down by 30 pixels for every 7th item
             shiftX = 10;
         }
 
@@ -77,7 +82,7 @@ export function CalendarWidget() {
         // }
         calendarWidget.push(hmUI.createWidget(hmUI.widget.TEXT, {
             x: shiftX, // Current x position
-            y: shitY, // Current y position
+            y: shiftY, // Current y position
             w: 50, // Width of the text widget
             h: 25, // Height of the text widget
             color: weekColor, // Text color
@@ -91,7 +96,7 @@ export function CalendarWidget() {
         if (day === currentDay) {
             calendarWidget.push(hmUI.createWidget(hmUI.widget.STROKE_RECT, {
                 x: shiftX + 5,
-                y: shitY - 2,
+                y: shiftY - 2,
                 w: 40,
                 h: 30,
                 radius: 10,
