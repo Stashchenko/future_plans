@@ -1,7 +1,7 @@
 {
   "configVersion": "v2",
   "app": {
-    "appId": 1065026,
+    "appId": 1065605,
     "appName": "Future Plans",
     "appType": "watchface",
     "version": {
@@ -10,7 +10,7 @@
     },
     "vender": "Stashchenko",
     "venderId": 7080715909,
-    "description": "Shows calendar for next 2 weeks",
+    "description": "Shows calendar for next 3 weeks",
     "icon": "icon.png"
   },
   "permissions": [],
@@ -22,7 +22,7 @@
     }
   },
   "targets": {
-    "390x450-amazfit-active": {
+    "square": {
       "module": {
         "watchface": {
           "path": "watchface/index",
@@ -33,12 +33,24 @@
       },
       "platforms": [
         {
-          "name": "Hannover（国内）",
+          "name": "Active",
+          "deviceSource": 7995648
+        },
+        {
+          "name": "Active",
+          "deviceSource": 7995649
+        },
+        {
+          "name": "GTS-4",
           "deviceSource": 8323328
         },
         {
-          "name": "Hannover（海外版）",
+          "name": "GTS-4",
           "deviceSource": 8323329
+        },
+        {
+          "name": "Cheetah Square",
+          "deviceSource": 8257793
         }
       ],
       "designWidth": 390
