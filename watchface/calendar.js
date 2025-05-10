@@ -1,6 +1,7 @@
 import {getLangTable} from "./i18n";
 
 const colorWhite = 0xffffff;
+const colorGray = 0x808080;
 const weekDays = getLangTable().weekNamesConfig
 
 let calendarWidget = []
@@ -32,9 +33,6 @@ export function CalendarWidget() {
     // calendar week names
     let shift = 10;
     weekDays.forEach((day, index) => {
-        // if (index === 5 || index === 6) {
-        //     weekColor = colorRed
-        // }
         hmUI.createWidget(hmUI.widget.TEXT, {
             x: shift,
             y: 178,
@@ -62,41 +60,35 @@ export function CalendarWidget() {
         align_h: hmUI.align.CENTER_H,
         align_v: hmUI.align.CENTER_V,
         text_style: hmUI.text_style.NONE,
-        text: currentDay + "." + currentMonth + "." + currentYear
+        text: currentDay + "." + String(currentMonth).padStart(2, '0') + "." + currentYear
     }));
 
-    let dates = getNextTwoWeeksDates(currentDay, currentMonth, currentYear)
+    let dates = getNextThreeWeeksDates(currentDay, currentMonth, currentYear)
     let shiftX = 10; // Initialize the shift for x position
     let shiftY = 180; // Initialize y position
-    let weekColor = colorWhite
-    dates.forEach((day, index) => {
+    dates.forEach((dayProp, index) => {
         if (index % 7 === 0) {
             shiftY += 32; // Move down by 30 pixels for every 7th item
             shiftX = 10;
         }
 
-        // if (index % 7 === 5 || index % 7 === 6) { // 5 is Saturday, 6 is Sunday
-        //     weekColor = colorRed
-        // } else {
-        //     weekColor = colorWhite
-        // }
         calendarWidget.push(hmUI.createWidget(hmUI.widget.TEXT, {
             x: shiftX, // Current x position
             y: shiftY, // Current y position
             w: 50, // Width of the text widget
             h: 25, // Height of the text widget
-            color: weekColor, // Text color
+            color: dayProp.color, // Text color
             text_size: 25, // Size of the text
             align_h: hmUI.align.CENTER_H, // Horizontal alignment
             align_v: hmUI.align.CENTER_V, // Vertical alignment
             text_style: hmUI.text_style.NONE, // Text style
-            text: String(day).padStart(2, ' ') // Display the current timeToDisplay value
+            text: String(dayProp.day).padStart(2, '') // Display the current timeToDisplay value
         }));
 
-        if (day === currentDay) {
+        if (dayProp.day === currentDay) {
             calendarWidget.push(hmUI.createWidget(hmUI.widget.STROKE_RECT, {
-                x: shiftX + 5,
-                y: shiftY - 2,
+                x: shiftX + 6,
+                y: shiftY - 1,
                 w: 40,
                 h: 30,
                 radius: 10,
@@ -108,29 +100,28 @@ export function CalendarWidget() {
     })
 }
 
-// Function to get the next 14 dates starting from the current date
-function getNextTwoWeeksDates(currentDay, currentMonth, currentYear) {
+function getNextThreeWeeksDates(currentDay, currentMonth, currentYear) {
     const dates = [];
-
-    // Create a date object for the current date
     const currentDate = new Date(currentYear, currentMonth - 1, currentDay);
 
-    // Calculate the day of the week (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
-    const dayOfWeek = currentDate.getDay();
+    const currentRealMonth = currentDate.getMonth(); // Store real current month (0-indexed)
 
-    // Calculate how many days to subtract to get to the most recent Monday
+    const dayOfWeek = currentDate.getDay();
     const mondayOffset = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
 
-    // Set the date to the most recent Monday
-    currentDate.setDate(currentDate.getDate() + mondayOffset);
+    currentDate.setDate(currentDate.getDate() + mondayOffset - 7);
 
-    // Loop to get the next 14 days starting from the most recent Monday
     for (let i = 0; i < 21; i++) {
-        // Push the actual date (day of the month) into the array
-        dates.push(currentDate.getDate()); // Push just the day of the month
+        const dateMonth = currentDate.getMonth(); // month of this specific date
+        const dayColor = dateMonth !== currentRealMonth ? colorGray : colorWhite;
 
-        // Move to the next day
+        dates.push({
+            day: currentDate.getDate(),
+            color: dayColor
+        });
+
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    return dates; // Return the array of days of the month
+
+    return dates;
 }
