@@ -25,3 +25,6 @@ https://docs.zepp.com/docs/guides/tools/zepp-app/#view-real-machine-logs
 API:
 https://docs.zepp.com/docs/watchface/watchface-quick-start/
 
+
+Device List:
+https://docs.zepp.com/docs/reference/related-resources/device-list/

@@ -1,7 +1,9 @@
 import {getLangTable} from "./i18n";
 
 const colorWhite = 0xffffff;
+// const colorRed = 0xff0000;
 const weekDays = getLangTable().weekNamesConfig
+// const monthNamesConfig = getLangTable().monthNamesConfig
 
 let calendarWidget = []
 let lastUpdatedCalendar = new Date(1997, 1, 10);
@@ -66,8 +68,8 @@ export function CalendarWidget() {
     }));
 
     let dates = getNextTwoWeeksDates(currentDay, currentMonth, currentYear)
-    let shiftX = 10; // Initialize the shift for x position
-    let shiftY = 210; // Initialize y position
+    let shiftX = 0; // Initialize the shift for x position
+    let shiftY = 209; // Initialize y position
     let weekColor = colorWhite
     dates.forEach((day, index) => {
         if (index % 7 === 0) {
@@ -90,14 +92,14 @@ export function CalendarWidget() {
             align_h: hmUI.align.CENTER_H, // Horizontal alignment
             align_v: hmUI.align.CENTER_V, // Vertical alignment
             text_style: hmUI.text_style.NONE, // Text style
-            text: String(day).padStart(2, ' ') // Display the current timeToDisplay value
+            text: String(day).padStart(2, '') // Display the current timeToDisplay value
         }));
 
         if (day === currentDay) {
             calendarWidget.push(hmUI.createWidget(hmUI.widget.STROKE_RECT, {
                 x: shiftX + 5,
-                y: shiftY - 2,
-                w: 40,
+                y: shiftY - 3,
+                w: 44,
                 h: 30,
                 radius: 10,
                 line_width: 2,
