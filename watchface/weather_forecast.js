@@ -18,8 +18,8 @@ export function WeatherForecastWidget() {
     // removing old widgets
     weatherWidgets.forEach((widget, index) => {
         hmUI.deleteWidget(widget)
-        weatherWidgets = []
     })
+    weatherWidgets = []
 
     lastUpdatedWeatherTime = currentTime
     const weather = hmSensor.createSensor(hmSensor.id.WEATHER)
